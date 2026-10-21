@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <title>On te défie · Versy</title>
+  <meta property="og:title" content="On te défie sur Versy">
+  <meta property="og:description" content="Classe la liste par duels, puis compare tes goûts avec ceux de ton ami.">
+  <meta property="og:image" content="https://gabrielgaudin.github.io/versy-site/logo.png">
+  <link rel="icon" href="../logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:wght@500;700;900&display=swap">
+  <link rel="stylesheet" href="../style.css">
+  <style>
+    .challenge { text-align: center; }
+    .challenge .emoji { font-size: 48px; line-height: 1.2; }
+    .challenge h2 { font-size: 26px; margin: 4px 0; }
+    .cta { display: block; background: var(--brand); color: #FFFFFF; text-decoration: none; font-size: 18px; font-weight: 900; padding: 16px 20px; border-radius: 18px; margin-top: 18px; }
+  </style>
+</head>
+<body>
+  <header class="top">
+    <div class="top-in">
+      <a class="brand" href="../"><img src="../logo.png" alt="">Versy</a>
+      <h1>On te défie !</h1>
+      <p>Classe la liste par duels, puis découvre si ton ami et toi avez les mêmes goûts.</p>
+    </div>
+  </header>
+  <main>
+    <div class="card challenge" id="challenge" hidden>
+      <div class="emoji" id="emoji"></div>
+      <h2 id="title"></h2>
+      <p class="muted" id="count"></p>
+      <a class="cta" id="open" href="#">Relever le défi dans Versy</a>
+    </div>
+    <div class="card" id="broken" hidden>
+      <h2>Lien de défi illisible</h2>
+      <p>Le lien a peut-être été coupé en route. Demande à ton ami de te le renvoyer en entier.</p>
+    </div>
+    <div class="card">
+      <h2>Pas encore Versy ?</h2>
+      <p>Versy arrive bientôt sur le Play Store. En attendant, demande à la personne qui t’a défié comment l’installer.</p>
+    </div>
+    <p class="muted">Le défi se trouve dans le lien lui-même : il est lu par ton navigateur et n’est envoyé à aucun serveur. <a href="../confidentialite/">Confidentialité</a></p>
+  </main>
+  <script>
+    // Le défi est après le « # » (jamais envoyé au serveur), encodé en base64url (voir l'app, src/lib/challenge.ts).
+    (function () {
+      var data = location.hash.slice(1);
+      var challenge = null;
+      try {
+        var b64 = data.replace(/-/g, '+').replace(/_/g, '/');
+        var binary = atob(b64 + '==='.slice((b64.length + 3) % 4));
+        var bytes = Uint8Array.from(binary, function (c) { return c.charCodeAt(0); });
+        challenge = JSON.parse(new TextDecoder().decode(bytes));
+        if (challenge.v !== 1 || typeof challenge.t !== 'string' || !Array.isArray(challenge.i)) challenge = null;
+      } catch (e) {
+        challenge = null;
+      }
+      if (!challenge) {
+        document.getElementById('broken').hidden = false;
+        return;
+      }
+      document.title = challenge.t + ' · Versy';
+      document.getElementById('emoji').textContent = challenge.e || '⚔️';
+      document.getElementById('title').textContent = challenge.t;
+      document.getElementById('count').textContent = challenge.i.length + ' éléments à classer';
+      document.getElementById('challenge').hidden = false;
+
+      // Adresse de l'app : `versy://defi`, ou celle d'Expo Go pendant le développement (`?app=exp://…`).
+      var app = new URLSearchParams(location.search).get('app');
+      var link;
+      if (app) {
+        link = app + '?d=' + data;
+      } else if (/Android/i.test(navigator.userAgent)) {
+        // Sur Android, si l'app n'est pas installée, on revient sur l'accueil du site au lieu de ne rien faire.
+        link = 'intent://defi?d=' + data + '#Intent;scheme=versy;S.browser_fallback_url=' +
+          encodeURIComponent('https://gabrielgaudin.github.io/versy-site/') + ';end';
+      } else {
+        link = 'versy://defi?d=' + data;
+      }
+      document.getElementById('open').href = link;
+    })();
+  </script>
+</body>
+</html>
