@@ -2,8 +2,8 @@
   --bg: #F4EFE6;
   --ink: #0F1124;
   --soft: #4A4E6A;
-  --brand: #F2552C;
-  --brand-deep: #C7350F;
+  --brand: #EE3F2C;
+  --brand-deep: #BF2414;
   --surface: #FFFFFF;
   --line: #E6DFD2;
 }
@@ -18,7 +18,7 @@ body {
 }
 a { color: var(--brand); font-weight: 700; }
 .top {
-  background: linear-gradient(170deg, #FF7B52, var(--brand-deep));
+  background: linear-gradient(170deg, #FF6A4D, var(--brand-deep));
   color: #FFFFFF;
   padding: 28px 20px 36px;
 }
