@@ -7,7 +7,7 @@
   <title>On te défie · Versy</title>
   <meta property="og:title" content="On te défie sur Versy">
   <meta property="og:description" content="Classe la liste par duels, puis compare tes goûts avec ceux de ton ami.">
-  <meta property="og:image" content="https://gabrielgaudin.github.io/versy-site/logo.png">
+  <meta property="og:image" content="https://versy.gleam-apps.com/logo.png">
   <link rel="icon" href="../logo.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -77,7 +77,7 @@
       } else if (/Android/i.test(navigator.userAgent)) {
         // Sur Android, si l'app n'est pas installée, on revient sur l'accueil du site au lieu de ne rien faire.
         link = 'intent://defi?d=' + data + '#Intent;scheme=versy;S.browser_fallback_url=' +
-          encodeURIComponent('https://gabrielgaudin.github.io/versy-site/') + ';end';
+          encodeURIComponent('https://versy.gleam-apps.com/') + ';end';
       } else {
         link = 'versy://defi?d=' + data;
       }
