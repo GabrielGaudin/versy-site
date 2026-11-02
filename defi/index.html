@@ -68,7 +68,7 @@
       document.getElementById('title').textContent = challenge.t;
       document.getElementById('count').textContent = challenge.i.length + ' éléments à classer';
       // Prénom de l'envoyeur, s'il l'a donné (2 novembre 2026).
-      var sender = typeof challenge.n === 'string' ? challenge.n.trim().slice(0, 20) : '';
+      var sender = typeof challenge.n === 'string' ? challenge.n.replace(/[^\p{L} '’-]/gu, '').trim().slice(0, 30) : '';
       if (sender) {
         document.getElementById('who').textContent = sender + ' te défie !';
         document.getElementById('friend').textContent = sender;
