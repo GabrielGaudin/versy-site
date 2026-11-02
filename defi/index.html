@@ -24,8 +24,8 @@
   <header class="top">
     <div class="top-in">
       <a class="brand" href="../"><img src="../logo.png" alt="">Versy</a>
-      <h1>On te défie !</h1>
-      <p>Classe la liste par duels, puis découvre si ton ami et toi avez les mêmes goûts.</p>
+      <h1 id="who">On te défie !</h1>
+      <p>Classe la liste par duels, puis découvre si <span id="friend">ton ami</span> et toi avez les mêmes goûts.</p>
     </div>
   </header>
   <main>
@@ -67,6 +67,12 @@
       document.getElementById('emoji').textContent = challenge.e || '⚔️';
       document.getElementById('title').textContent = challenge.t;
       document.getElementById('count').textContent = challenge.i.length + ' éléments à classer';
+      // Prénom de l'envoyeur, s'il l'a donné (2 novembre 2026).
+      var sender = typeof challenge.n === 'string' ? challenge.n.trim().slice(0, 20) : '';
+      if (sender) {
+        document.getElementById('who').textContent = sender + ' te défie !';
+        document.getElementById('friend').textContent = sender;
+      }
       document.getElementById('challenge').hidden = false;
 
       // Adresse de l'app : `versy://defi`, ou celle d'Expo Go pendant le développement (`?app=exp://…`).
