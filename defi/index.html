@@ -41,7 +41,7 @@
     </div>
     <div class="card">
       <h2>Pas encore Versy ?</h2>
-      <p>Versy arrive bientôt sur le Play Store. En attendant, demande à la personne qui t’a défié comment l’installer.</p>
+      <p>Le bouton ouvre Versy dans ton navigateur, sans rien installer. L’app arrive bientôt sur le Play Store.</p>
     </div>
     <p class="muted">Le défi se trouve dans le lien lui-même : il est lu par ton navigateur et n’est envoyé à aucun serveur. <a href="../confidentialite/">Confidentialité</a></p>
   </main>
@@ -76,16 +76,18 @@
       document.getElementById('challenge').hidden = false;
 
       // Adresse de l'app : `versy://defi`, ou celle d'Expo Go pendant le développement (`?app=exp://…`).
+      var web = 'https://versy.gleam-apps.com/app/defi?d=' + data;
       var app = new URLSearchParams(location.search).get('app');
       var link;
       if (app) {
         link = app + '?d=' + data;
       } else if (/Android/i.test(navigator.userAgent)) {
-        // Sur Android, si l'app n'est pas installée, on revient sur l'accueil du site au lieu de ne rien faire.
+        // Sur Android, si l'app n'est pas installée, on ouvre la version web (7 novembre 2026).
         link = 'intent://defi?d=' + data + '#Intent;scheme=versy;S.browser_fallback_url=' +
-          encodeURIComponent('https://versy.gleam-apps.com/') + ';end';
+          encodeURIComponent(web) + ';end';
       } else {
-        link = 'versy://defi?d=' + data;
+        // iPhone, ordinateur : la version web de Versy.
+        link = web;
       }
       document.getElementById('open').href = link;
     })();
