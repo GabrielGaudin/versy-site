@@ -35,6 +35,10 @@ ul { padding-left: 22px; }
 li { margin: 4px 0; }
 .summary { border-left: 4px solid var(--brand); }
 .muted { color: var(--soft); font-size: 15px; }
+/* Bouton principal, comme sur la page des liens de défi : seul élément en couleur de marque. */
+.cta { display: block; margin: 18px 0 4px; text-align: center; background: linear-gradient(160deg, #FF6A4D, var(--brand-deep)); color: #FFFFFF; text-decoration: none; font-size: 18px; font-weight: 900; padding: 16px 20px; border-radius: 18px; box-shadow: 0 10px 24px rgba(191, 36, 20, 0.28); }
+.cta:active { transform: scale(0.98); }
+.cta + .muted { margin: 10px 0 0; text-align: center; }
 nav.links { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 18px; }
 nav.links a { background: rgba(255, 255, 255, 0.18); border: 1px solid rgba(255, 255, 255, 0.35); color: #FFFFFF; text-decoration: none; padding: 8px 14px; border-radius: 12px; font-size: 15px; }
 footer { max-width: 720px; margin: 0 auto; padding: 0 20px 40px; color: var(--soft); font-size: 14px; }
