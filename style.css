@@ -38,6 +38,8 @@ li { margin: 4px 0; }
 /* Bouton principal, comme sur la page des liens de défi : seul élément en couleur de marque. */
 .cta { display: block; margin: 18px 0 4px; text-align: center; background: linear-gradient(160deg, #FF6A4D, var(--brand-deep)); color: #FFFFFF; text-decoration: none; font-size: 18px; font-weight: 900; padding: 16px 20px; border-radius: 18px; box-shadow: 0 10px 24px rgba(191, 36, 20, 0.28); }
 .cta:active { transform: scale(0.98); }
+/* Bouton secondaire (accueil : jouer dans le navigateur) : contour, sans couleur pleine. */
+.cta.secondary { margin-top: 10px; background: none; color: var(--brand-deep); border: 2px solid var(--line); box-shadow: none; font-size: 17px; padding: 14px 20px; }
 .cta + .muted { margin: 10px 0 0; text-align: center; }
 nav.links { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 18px; }
 nav.links a { background: rgba(255, 255, 255, 0.18); border: 1px solid rgba(255, 255, 255, 0.35); color: #FFFFFF; text-decoration: none; padding: 8px 14px; border-radius: 12px; font-size: 15px; }
